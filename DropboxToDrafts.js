@@ -10,7 +10,7 @@
 
 let msg = '';
 let fileCount = 0;
-var folder = '/drafts/';
+var folder = '/apps/Drafts/';
 
 // create Dropbox object and vars
 let db = Dropbox.create();
@@ -42,10 +42,7 @@ if ( response.statusCode != 200 ) {
         let fileName = dbDraftsList[ key ].name
         let filePath = folder + fileName
         var fileContents = db.read(filePath);
-        var draftTitle = fileContents.slice(0, fileContents.indexOf('\n'));
-        msg += '* ' + draftTitle + '\n';
-
-        // TODO: check for errors reading content like Windows/DOS line endings [CR-LF]
+        fileContents = fileName + '\n' + fileContents;
 
         // Create a new Draft for each Dropbox file
         var d = Draft.create();
